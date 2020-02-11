@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 class UsersController extends Controller
 {
      public function index()
@@ -56,5 +56,34 @@ class UsersController extends Controller
         $data += $this->counts($user);
 
         return view('users.followers', $data);
+    }
+     public function favorites($id)
+    {
+        $user = User::find($id);
+        $favorites = $user->favorites()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'users' => $favorites,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.favorites', $data);
+    }
+
+    public function favorite_users($id)
+    {
+        $user = User::find($id);
+        $followers = $user->favorite_users()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'users' => $favorite_users,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.favorites', $data);
     }
 }
