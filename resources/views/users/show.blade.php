@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <img class="rounded img-fluid" src="{{ Gravatar::src($user->email, 500) }}" alt="">
-                </div>
+       </div>
             </div>
             @include('user_follow.follow_button', ['user' => $user])
         </aside>
@@ -21,11 +21,13 @@
                         {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
                         {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
                     </div>
+                    
                 {!! Form::close() !!}
             @endif
             @if (count($microposts) > 0)
                 @include('microposts.microposts', ['microposts' => $microposts])
             @endif
         </div>
+        
     </div>
 @endsection
